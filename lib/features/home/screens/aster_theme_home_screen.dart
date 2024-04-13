@@ -169,7 +169,7 @@ class _AsterThemeHomeScreenState extends State<AsterThemeHomeScreen> {
                       SizedBox(height: ResponsiveHelper.isTab(context)? MediaQuery.of(context).size.width * .58 : 350, child: const Padding(
                           padding: EdgeInsets.only(bottom: Dimensions.homePagePadding),
                           child: FlashDealsListWidget()))]) : const SizedBox.shrink():
-                    const FlashDealShimmer();}),
+                    const FlashDealShimmer();},),
 
 
                 // Find what you need
@@ -277,9 +277,12 @@ class _AsterThemeHomeScreenState extends State<AsterThemeHomeScreen> {
                                   color: Theme.of(context).colorScheme.onSecondaryContainer))),
 
                         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            TitleRowWidget( title: getTranslated('featured_products', context),
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_) =>
-                                    AllProductScreen(productType: ProductType.featuredProduct)))),
+                              Padding(padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeExtraSmall),
+                                child: Padding(padding: const EdgeInsets.only(top: 20, left: 50,bottom: Dimensions.paddingSizeSmall),
+                                    child: TitleRowWidget( title: getTranslated('featured_products', context),
+                                        onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_) =>
+                                            AllProductScreen(productType: ProductType.featuredProduct))))
+                                )),
 
                             Padding(padding: const EdgeInsets.only(bottom: Dimensions.homePagePadding),
                                 child: FeaturedProductWidget(scrollController: _scrollController, isHome: true))])]):

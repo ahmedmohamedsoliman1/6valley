@@ -27,12 +27,8 @@ class ShopInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var splashController = Provider.of<SplashController>(context, listen: false);
     return Column(children: [
-      CustomImageWidget(image:
-      sellerId == 0 ?
-      splashController.configModel!.companyCoverImage ?? '' :
-      '${Provider.of<SplashController>(context, listen: false).baseUrls!.shopImageUrl}/banner/$banner',
+      CustomImageWidget(image: '${Provider.of<SplashController>(context, listen: false).baseUrls!.shopImageUrl}/banner/$banner',
       placeholder: Images.placeholder_3x1,width: MediaQuery.of(context).size.width, height: ResponsiveHelper.isTab(context)? 250 : 120,),
 
 
@@ -51,9 +47,7 @@ class ShopInfoWidget extends StatelessWidget {
                     [BoxShadow(color: Colors.grey.withOpacity(0.3), spreadRadius: 1, blurRadius: 5)]),
                   child: ClipRRect(borderRadius: BorderRadius.circular(Dimensions.paddingSizeExtraSmall),
                     child: CustomImageWidget(height: 80, width: 80, fit: BoxFit.cover,
-                      image: sellerId == 0 ?
-                      splashController.configModel!.companyIcon ?? '' :
-                      '${Provider.of<SplashController>(context, listen: false).baseUrls!.shopImageUrl}/$shopImage'))),
+                      image: '${Provider.of<SplashController>(context, listen: false).baseUrls!.shopImageUrl}/$shopImage'))),
                 if(temporaryClose || vacationIsOn)
                   Container(width: 80,height: 80,
                       decoration: BoxDecoration(

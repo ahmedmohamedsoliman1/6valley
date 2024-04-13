@@ -50,8 +50,7 @@ class ShippingMethodBottomSheetWidgetState extends State<ShippingMethodBottomShe
             Padding(padding: const EdgeInsets.all(Dimensions.paddingSizeSmall),
               child: Consumer<ShippingController>(
                 builder: (context, shippingController, child) {
-                  return shippingController.isLoading ? const Center(child: CircularProgressIndicator()) :
-                    (shippingController.shippingList != null && shippingController.shippingList!.isNotEmpty &&
+                  return (shippingController.shippingList != null && shippingController.shippingList!.isNotEmpty &&
                       shippingController.shippingList![widget.sellerIndex].shippingMethodList != null) ?
                   ( shippingController.shippingList![widget.sellerIndex].shippingMethodList!.isNotEmpty) ?
                   Column(mainAxisSize: MainAxisSize.min, children: [

@@ -83,9 +83,4 @@ class ProfileController extends ChangeNotifier {
   }
 
 
-  void clearProfileData() {
-    _userInfoModel = null;
-    notifyListeners();
-  }
-
 }

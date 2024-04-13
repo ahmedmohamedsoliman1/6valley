@@ -38,12 +38,11 @@ class _ProductDetailsState extends State<ProductDetails> {
   _loadData( BuildContext context) async{
     Provider.of<ProductDetailsController>(context, listen: false).getProductDetails(context, widget.productId.toString(), widget.slug.toString());
     Provider.of<ReviewController>(context, listen: false).removePrevReview();
-    Provider.of<ProductDetailsController>(context, listen: false).removePrevLink();
     Provider.of<ReviewController>(context, listen: false).getReviewList(widget.productId, widget.slug, context);
     Provider.of<ProductController>(context, listen: false).removePrevRelatedProduct();
     Provider.of<ProductController>(context, listen: false).initRelatedProductList(widget.productId.toString(), context);
     Provider.of<ProductDetailsController>(context, listen: false).getCount(widget.productId.toString(), context);
-    Provider.of<ProductDetailsController>(context, listen: false).getSharableLink(widget.slug.toString(), context);
+
   }
 
   @override

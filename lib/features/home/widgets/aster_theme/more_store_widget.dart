@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_sixvalley_ecommerce/features/shop/domain/models/more_store_model.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/controllers/localization_controller.dart';
@@ -36,7 +34,9 @@ class _MoreStoreWidgetState extends State<MoreStoreWidget> {
 
       if(difference >= 0 && widget.moreStore.shop!.vacationStatus! && startDate <= 0){
         vacationIsOn = true;
-      } else{
+      }
+
+      else{
         vacationIsOn = false;
       }
 
@@ -58,7 +58,7 @@ class _MoreStoreWidgetState extends State<MoreStoreWidget> {
       EdgeInsets.only(left : Provider.of<LocalizationController>(context, listen: false).isLtr ?
       Dimensions.paddingSizeSmall : 0, right: widget.index+1 == widget.length? Dimensions.paddingSizeDefault :
       Provider.of<LocalizationController>(context, listen: false).isLtr ? 0 : Dimensions.paddingSizeDefault):
-      const EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeExtraSmall),
+      const EdgeInsets.symmetric(horizontal: Dimensions.homePagePadding),
         child: Column( children: [Stack(children: [
           Center(child: Container(height: MediaQuery.of(context).size.width /6.6, width: MediaQuery.of(context).size.width /6.6,
               decoration: BoxDecoration(border: Border.all(color: Theme.of(context).primaryColor.withOpacity(.125),width: .25),
@@ -66,14 +66,11 @@ class _MoreStoreWidgetState extends State<MoreStoreWidget> {
               child: ClipRRect(borderRadius: BorderRadius.circular(30),
                   child: CustomImageWidget(image: '${Provider.of<SplashController>(context,listen: false).baseUrls!.shopImageUrl}'
                       '/${widget.moreStore.shop?.image}'))),),
-
-
           if(widget.moreStore.shop!.temporaryClose!  || vacationIsOn)
-            Center(
-              child: Container(height: MediaQuery.of(context).size.width/6.6, width:  MediaQuery.of(context).size.width/6.6,
+            Container(height: MediaQuery.of(context).size.width/6.3, width:  MediaQuery.of(context).size.width/6.3,
                 decoration: BoxDecoration(color: Colors.black.withOpacity(.5),
-                borderRadius: const BorderRadius.all(Radius.circular(30)))),
-            ),
+
+                    borderRadius: const BorderRadius.all(Radius.circular(30)))),
 
           widget.moreStore.shop!.temporaryClose!?
           Positioned(top: 0,left: 0,right: 0,bottom: 0,

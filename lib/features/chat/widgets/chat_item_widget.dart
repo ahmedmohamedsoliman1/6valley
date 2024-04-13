@@ -128,9 +128,8 @@ class _ChatItemWidgetState extends State<ChatItemWidget> {
                               style: textBold.copyWith(fontSize: Dimensions.fontSizeDefault))),
 
                           const SizedBox(width: Dimensions.paddingSizeSmall),
-
-                          Text(DateConverter.compareDates(widget.chat!.createdAt!),
-                              style: titilliumRegular.copyWith(fontSize: Dimensions.fontSizeSmall,
+                          Text(DateConverter.inboxLocalDateToIsoStringAMPM(DateTime.parse(widget.chat!.createdAt!)),
+                              style: titilliumRegular.copyWith(fontSize: Dimensions.fontSizeExtraSmall,
                                   color: Theme.of(context).hintColor)),
                         ],),
                         const SizedBox(height: Dimensions.paddingSizeSmall,),

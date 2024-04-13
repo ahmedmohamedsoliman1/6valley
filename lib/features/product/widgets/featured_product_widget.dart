@@ -41,18 +41,18 @@ class FeaturedProductWidget extends StatelessWidget {
                     padEnds: false,
                     enlargeCenterPage: true,
                     disableCenter: true,
-                    onPageChanged: (index, reason) => prodProvider.setFeaturedIndex(index == 0 ? 0.5 : double.parse(index.toString()))),
+                    onPageChanged: (index, reason) => prodProvider.setFeaturedIndex(index)),
                   itemCount: productList.length,
                   itemBuilder: (context, index, _) => ProductWidget(productModel: productList![index]))) :
 
-                MasonryGridView.count(
-                  itemCount: productList.length,
-                  crossAxisCount: ResponsiveHelper.isTab(context)? 3 : 2,
-                  padding: const EdgeInsets.all(0),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) => ProductWidget(productModel: productList![index]),
-                ): const SizedBox.shrink() : ProductShimmer(isHomePage: true ,isEnabled: prodProvider.firstFeaturedLoading),
+              MasonryGridView.count(
+                itemCount: productList.length,
+                crossAxisCount: ResponsiveHelper.isTab(context)? 3 :2,
+                padding: const EdgeInsets.all(0),
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemBuilder: (BuildContext context, int index) => ProductWidget(productModel: productList![index]),
+              ): const SizedBox.shrink() : ProductShimmer(isHomePage: true ,isEnabled: prodProvider.firstFeaturedLoading),
 
               prodProvider.isFeaturedLoading ? Center(child: Padding(
                 padding: const EdgeInsets.all(Dimensions.iconSizeExtraSmall),
@@ -66,9 +66,9 @@ class FeaturedProductWidget extends StatelessWidget {
                   barRadius: const Radius.circular(Dimensions.paddingSizeDefault),
                   width: 80,
                   lineHeight: 4.0,
-                  percent: prodProvider.featuredIndex /productList!.length,
+                  percent: prodProvider.featuredIndex/productList!.length,
                   backgroundColor: Provider.of<ThemeController>(context, listen: false).darkTheme?
-                  Theme.of(context).primaryColor.withOpacity(.7):Theme.of(context).primaryColor.withOpacity(.2),
+                  Theme.of(context).primaryColor.withOpacity(.5):Theme.of(context).primaryColor.withOpacity(.2),
                   progressColor: (Provider.of<ThemeController>(context, listen: false).darkTheme)?
                   Theme.of(context).colorScheme.onSecondary :  Theme.of(context).primaryColor)))]);
       },

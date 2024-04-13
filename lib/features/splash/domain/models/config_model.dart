@@ -61,8 +61,6 @@ class ConfigModel {
   int? orderVerification;
   InhouseTemporaryClose? inhouseTemporaryClose;
   InhouseVacationAdd? inhouseVacationAdd;
-  int? mapApiStatus;
-  DefaultLocation? defaultLocation;
 
   ConfigModel(
       {this.brandSetting,
@@ -127,8 +125,6 @@ class ConfigModel {
         this.orderVerification,
         this.inhouseTemporaryClose,
         this.inhouseVacationAdd,
-        this.mapApiStatus,
-        this.defaultLocation
       });
 
   ConfigModel.fromJson(Map<String, dynamic> json) {
@@ -219,7 +215,7 @@ class ConfigModel {
     walletStatus = json['wallet_status'];
     loyaltyPointStatus = json['loyalty_point_status'];
     if(json['loyalty_point_exchange_rate'] != null){
-      //loyaltyPointExchangeRate = json['loyalty_point_exchange_rate'].toDouble();
+      loyaltyPointExchangeRate = json['loyalty_point_exchange_rate'].toDouble();
     }else{
       loyaltyPointExchangeRate = 1;
     }
@@ -278,11 +274,6 @@ class ConfigModel {
     inhouseVacationAdd = json['inhouse_vacation_add'] != null
         ? InhouseVacationAdd.fromJson(json['inhouse_vacation_add'])
         : null;
-    mapApiStatus = json['map_api_status'] != null ? int.parse(json['map_api_status'].toString()) : null;
-
-    defaultLocation = json['default_location'] != null
-      ? DefaultLocation.fromJson(json['default_location'])
-      : null;
 
   }
 
@@ -564,7 +555,7 @@ class InhouseTemporaryClose {
   InhouseTemporaryClose({this.status});
 
   InhouseTemporaryClose.fromJson(Map<String, dynamic> json) {
-    status = int.tryParse(json['status'].toString()) ?? 0;
+    status = json['status']??0;
   }
 }
 
@@ -587,24 +578,4 @@ class InhouseVacationAdd {
     vacationNote = json['vacation_note'];
   }
 
-}
-
-
-class DefaultLocation {
-  String? lat;
-  String? lng;
-
-  DefaultLocation({this.lat, this.lng});
-
-  DefaultLocation.fromJson(Map<String, dynamic> json) {
-    lat = json['lat'];
-    lng = json['lng'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lat'] = this.lat;
-    data['lng'] = this.lng;
-    return data;
-  }
 }

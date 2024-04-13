@@ -4,7 +4,6 @@ import 'package:flutter_sixvalley_ecommerce/features/shop/controllers/shop_contr
 import 'package:flutter_sixvalley_ecommerce/features/shop/widgets/seller_shimmer.dart';
 import 'package:flutter_sixvalley_ecommerce/features/shop/widgets/top_seller_shimmer.dart';
 import 'package:flutter_sixvalley_ecommerce/features/shop/widgets/seller_card.dart';
-import 'package:flutter_sixvalley_ecommerce/features/splash/domain/models/config_model.dart';
 import 'package:provider/provider.dart';
 
 

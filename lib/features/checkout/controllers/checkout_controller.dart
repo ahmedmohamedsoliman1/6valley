@@ -50,10 +50,6 @@ class CheckoutController with ChangeNotifier {
       inputValueList.add(textEditingController.text.trim());
 
     }
-
-    print('=========AddressID=========>>${addressID}');
-    print('====billingAddressID=======>>${billingAddressId}');
-
     _isLoading = true;
     notifyListeners();
     ApiResponse apiResponse;
@@ -64,12 +60,9 @@ class CheckoutController with ChangeNotifier {
     apiResponse = await checkoutServiceInterface.cashOnDeliveryPlaceOrder(addressID, couponCode,couponAmount, billingAddressId, orderNote);
 
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      print('====ResponceStatus=======>>200');
-
       _isLoading = false;
       _addressIndex = null;
       _billingAddressIndex = null;
-      sameAsBilling = false;
 
       String message = apiResponse.response!.data.toString();
       callback(true, message, '');
@@ -220,9 +213,6 @@ class CheckoutController with ChangeNotifier {
 
     ApiResponse apiResponse = await checkoutServiceInterface.digitalPaymentPlaceOrder(orderNote, customerId, addressId, billingAddressId, couponCode, couponDiscount, paymentMethod);
     if (apiResponse.response != null && apiResponse.response!.statusCode == 200) {
-      _addressIndex = null;
-      _billingAddressIndex = null;
-      sameAsBilling = false;
       _isLoading = false;
       Navigator.pushReplacement(Get.context!, MaterialPageRoute(builder: (_) => DigitalPaymentScreen(url: apiResponse.response?.data['redirect_link'])));
 
@@ -238,9 +228,5 @@ class CheckoutController with ChangeNotifier {
   void setSameAsBilling(){
     sameAsBilling = !sameAsBilling;
     notifyListeners();
-  }
-
-  void clearAdditionalNote(){
-    orderNoteController.clear();
   }
 }

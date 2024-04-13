@@ -96,7 +96,7 @@ class Seller {
     totalRating = json['total_rating'];
     ratingCount = json['rating_count'];
     if(json['average_rating'] != null){
-      averageRating =  double.tryParse(json['average_rating'].toString());
+      averageRating = json['average_rating'].toDouble();
     }else{
       averageRating = 0;
     }

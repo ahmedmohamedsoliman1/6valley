@@ -80,8 +80,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
     }
 
     _billingAddress = Provider.of<SplashController>(Get.context!, listen: false).configModel!.billingInputByCustomer == 1;
-    Provider.of<CheckoutController>(context, listen: false).clearAdditionalNote();
-    print('=======OnlyDigital======>>${widget.onlyDigital}');
+
   }
 
   @override
@@ -119,19 +118,9 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                   String couponCode = couponProvider.discount != null && couponProvider.discount != 0? couponProvider.couponCode : '';
                                   String couponCodeAmount = couponProvider.discount != null && couponProvider.discount != 0?
                                   couponProvider.discount.toString() : '0';
-
-                                  // String addressId = !widget.onlyDigital? locationProvider.addressList![orderProvider.addressIndex!].id.toString():'';
-                                  // String billingAddressId = (_billingAddress)? orderProvider.sameAsBilling? addressId:
-                                  // locationProvider.addressList![orderProvider.billingAddressIndex!].id.toString() : '';
-
-                                  String addressId =  orderProvider.addressIndex != null ?
-                                  locationProvider.addressList![orderProvider.addressIndex!].id.toString() : '';
-
-                                  String billingAddressId = (_billingAddress)?
-                                  !orderProvider.sameAsBilling ?
-                                  locationProvider.addressList![orderProvider.billingAddressIndex!].id.toString() : locationProvider.addressList![orderProvider.addressIndex!].id.toString() : '';
-
-
+                                  String addressId = !widget.onlyDigital? locationProvider.addressList![orderProvider.addressIndex!].id.toString():'';
+                                  String billingAddressId = (_billingAddress)? orderProvider.sameAsBilling? addressId:
+                                  locationProvider.addressList![orderProvider.billingAddressIndex!].id.toString() : '';
 
                                   if(orderProvider.paymentMethodIndex != -1){
                                     orderProvider.digitalPaymentPlaceOrder(
@@ -146,10 +135,10 @@ class CheckoutScreenState extends State<CheckoutScreen> {
 
                                   }else if (orderProvider.codChecked && !widget.onlyDigital){
                                     orderProvider.placeOrder(callback: _callback,
-                                        addressID : addressId,
+                                        addressID : widget.onlyDigital ? '': addressId,
                                         couponCode : couponCode,
                                         couponAmount : couponCodeAmount,
-                                        billingAddressId : billingAddressId,
+                                        billingAddressId : _billingAddress? billingAddressId: widget.onlyDigital ? '': addressId,
                                         orderNote : orderNote);}
 
                                   else if(orderProvider.offlineChecked){
@@ -158,7 +147,7 @@ class CheckoutScreenState extends State<CheckoutScreen> {
 
                                   else if(orderProvider.walletChecked){
                                     showAnimatedDialog(context, WalletPaymentWidget(
-                                        currentBalance: profileProvider.balance ?? 0,
+                                        currentBalance: profileProvider.balance??0,
                                         orderAmount: _order + widget.shippingFee - widget.discount - _couponDiscount! + widget.tax,
                                         onTap: (){if(profileProvider.balance! <
                                             (_order + widget.shippingFee - widget.discount - _couponDiscount! + widget.tax)){
@@ -166,14 +155,14 @@ class CheckoutScreenState extends State<CheckoutScreen> {
                                           }else{
                                             Navigator.pop(context);
                                             orderProvider.placeOrder(callback: _callback,wallet: true,
-                                                addressID : addressId,
+                                                addressID : widget.onlyDigital ? '':
+                                                locationProvider.addressList![orderProvider.addressIndex!].id.toString(),
                                                 couponCode : couponCode,
                                                 couponAmount : couponCodeAmount,
-                                                billingAddressId : billingAddressId,
-                                                orderNote : orderNote);
-
-                                        }}), dismissible: false, willFlip: true);
-                                  }
+                                                billingAddressId : _billingAddress?
+                                                locationProvider.addressList![orderProvider.billingAddressIndex!].id.toString():
+                                                widget.onlyDigital ? '': locationProvider.addressList![orderProvider.addressIndex!].id.toString(),
+                                                orderNote : orderNote);}}), dismissible: false, willFlip: true);}
                                   else {
                                     showCustomSnackBar('${getTranslated('select_payment_method', context)}', context);
                                   }

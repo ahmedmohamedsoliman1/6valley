@@ -52,9 +52,7 @@ class _OfflinePaymentScreenState extends State<OfflinePaymentScreen> {
                           shrinkWrap: true,
                           itemCount: checkoutProvider.offlinePaymentModel!.offlineMethods!.length,
                           itemBuilder: (context, index){
-                            return InkWell(
-                              splashColor: Colors.transparent,
-                              onTap: (){
+                            return InkWell(onTap: (){
                               if(checkoutProvider.offlinePaymentModel?.offlineMethods != null &&
                                   checkoutProvider.offlinePaymentModel!.offlineMethods!.isNotEmpty){
                                 checkoutProvider.setOfflinePaymentMethodSelectedIndex(index);
@@ -116,16 +114,9 @@ class _OfflinePaymentScreenState extends State<OfflinePaymentScreen> {
                             String couponCodeAmount = couponProvider.discount != null && couponProvider.discount != 0?
                             couponProvider.discount.toString() : '0';
                             String addressId = checkoutProvider.addressIndex != null ?
-                            locationProvider.addressList![checkoutProvider.addressIndex!].id.toString() : '';
-                            String billingAddressId =  (Provider.of<SplashController>(context, listen: false).configModel!.billingInputByCustomer == 1)?
-                            !checkoutProvider.sameAsBilling ?
-                             locationProvider.addressList![checkoutProvider.billingAddressIndex!].id.toString() : locationProvider.addressList![checkoutProvider.addressIndex!].id.toString() : '';
-
-
-                            print('====AddressID=========>>${addressId}');
-                            print('====billingAddressID=======>>${billingAddressId}');
-
-
+                            locationProvider.addressList![checkoutProvider.addressIndex!].id.toString():'';
+                            String billingAddressId = (Provider.of<SplashController>(context, listen: false).configModel!.billingInputByCustomer == 1)?
+                            locationProvider.addressList![checkoutProvider.billingAddressIndex!].id.toString() : '';
                             checkoutProvider.placeOrder(callback: widget.callback, paymentNote: paymentNote,
                                 addressID: addressId, billingAddressId: billingAddressId,
                                 orderNote: orderNote, couponCode: couponCode, couponAmount: couponCodeAmount, isfOffline: true);

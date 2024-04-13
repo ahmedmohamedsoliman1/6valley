@@ -72,9 +72,7 @@ class _SellerCardState extends State<SellerCard> {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(Dimensions.paddingSizeSmall),
                       topRight: Radius.circular(Dimensions.paddingSizeSmall)),
-                  child: CustomImageWidget(image: widget.sellerModel!.id == 0 ?
-                  splashController.configModel!.companyCoverImage ?? '' :
-                  '${splashController.baseUrls!.shopImageUrl}/banner/${widget.sellerModel!.shop!.banner ?? ''}'))),
+                  child: CustomImageWidget(image: '${splashController.baseUrls!.shopImageUrl}/banner/${widget.sellerModel!.shop!.banner ?? ''}'))),
 
               Row(children: [
                   Container(transform: Matrix4.translationValues(12, -20, 0), height: 60, width: 60,
@@ -83,10 +81,7 @@ class _SellerCardState extends State<SellerCard> {
                             decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(Dimensions.paddingSizeOverLarge)),
                               color: Theme.of(context).highlightColor),
                             child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(Dimensions.paddingSizeOverLarge)),
-                              child: CustomImageWidget(
-                              image: widget.sellerModel!.id == 0 ?
-                              splashController.configModel!.companyIcon ?? '' :
-                              '${splashController.baseUrls!.shopImageUrl!}/${widget.sellerModel!.shop?.image}',
+                              child: CustomImageWidget(image: '${splashController.baseUrls!.shopImageUrl!}/${widget.sellerModel!.shop?.image}',
                                   width: 60,height: 60))),
 
                         if(widget.sellerModel!.shop!.temporaryClose??false  || vacationIsOn)

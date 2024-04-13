@@ -1,5 +1,4 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_sixvalley_ecommerce/features/profile/controllers/profile_contrroller.dart';
@@ -107,7 +106,7 @@ class _ReferAndEarnScreenState extends State<ReferAndEarnScreen> {
 
         DraggableScrollableSheet(
           initialChildSize: 0.1,
-          maxChildSize: (hintList.length + 1.0) * 0.1,
+          maxChildSize: 0.3,
           minChildSize: 0.1,
           builder: (context, scrollController) => ListView.builder(
             controller: scrollController,

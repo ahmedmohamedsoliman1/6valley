@@ -9,8 +9,6 @@ import 'package:flutter_sixvalley_ecommerce/features/checkout/controllers/checko
 import 'package:flutter_sixvalley_ecommerce/features/location/controllers/location_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/location/screens/select_location_screen.dart';
 import 'package:flutter_sixvalley_ecommerce/features/profile/controllers/profile_contrroller.dart';
-import 'package:flutter_sixvalley_ecommerce/features/splash/domain/models/config_model.dart' as config;
-import 'package:flutter_sixvalley_ecommerce/helper/country_code_helper.dart';
 import 'package:flutter_sixvalley_ecommerce/helper/velidate_check.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/main.dart';
@@ -43,7 +41,6 @@ class AddNewAddressScreen extends StatefulWidget {
 }
 
 class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
-  String? _countryDialCode = "+880";
   final TextEditingController _contactPersonNameController = TextEditingController();
   final TextEditingController _contactPersonEmailController = TextEditingController();
   final TextEditingController _contactPersonNumberController = TextEditingController();
@@ -60,16 +57,12 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
   CameraPosition? _cameraPosition;
   bool _updateAddress = true;
   Address? _address;
+
   String zip = '',  country = 'IN';
-  late LatLng _defaut;
 
   @override
   void initState() {
     super.initState();
-
-    config.DefaultLocation? dLocation = Provider.of<SplashController>(context, listen: false).configModel?.defaultLocation;
-    _defaut = LatLng(double.parse(dLocation?.lat ?? '0'), double.parse(dLocation?.lng ?? '0'));
-
     if(widget.isBilling!){
       _address = Address.billing;
     }else{
@@ -86,19 +79,10 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
     _checkPermission(() => Provider.of<LocationController>(context, listen: false).getCurrentLocation(context, true, mapController: _controller),context);
     if (widget.isEnableUpdate && widget.address != null) {
       _updateAddress = false;
-      print('===ccccc===>>${widget.address!.latitude.toString()}');
-
-
-
-      Provider.of<LocationController>(context, listen: false).updateMapPosition(CameraPosition(
-          target: LatLng(
-            (widget.address!.latitude != null && widget.address!.latitude != '0' && widget.address!.latitude != '') ?
-            double.parse(widget.address!.latitude!) : _defaut.latitude,
-            (widget.address!.longitude != null && widget.address!.longitude != '0' && widget.address!.longitude != '') ?
-            double.parse(widget.address!.longitude!) : _defaut.longitude,
-          )), true, widget.address!.address, context);
-      // _contactPersonNameController.text = '${widget.address?.contactPersonName}';
-      // _contactPersonNumberController.text = '${widget.address?.phone}';
+      Provider.of<LocationController>(context, listen: false).updateMapPosition(CameraPosition(target: LatLng(double.parse(widget.address!.latitude!),
+          double.parse(widget.address!.longitude!))), true, widget.address!.address, context);
+      _contactPersonNameController.text = '${widget.address?.contactPersonName}';
+      _contactPersonNumberController.text = '${widget.address?.phone}';
       _cityController.text = '${widget.address?.city}';
       _zipCodeController.text = '${widget.address?.zip}';
       if (widget.address!.addressType == 'Home') {
@@ -108,21 +92,13 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
       } else {
         Provider.of<AddressController>(context, listen: false).updateAddressIndex(2, false);
       }
-      String countryCode = CountryCodeHelper.getCountryCode(widget.address?.phone ?? '')!;
-      Provider.of<AuthController>(context, listen: false).setCountryCode(countryCode);
-      String phoneNumberOnly = CountryCodeHelper.extractPhoneNumber(countryCode, widget.address?.phone ?? '');
-      _contactPersonNumberController.text = phoneNumberOnly;
-
     }else {
       if(Provider.of<ProfileController>(context, listen: false).userInfoModel!=null){
         _contactPersonNameController.text = '${Provider.of<ProfileController>(context, listen: false).userInfoModel!.fName ?? ''}'
             ' ${Provider.of<ProfileController>(context, listen: false).userInfoModel!.lName ?? ''}';
-
-        String countryCode = CountryCodeHelper.getCountryCode(Provider.of<ProfileController>(context, listen: false).userInfoModel!.phone ?? '')!;
-        Provider.of<AuthController>(context, listen: false).setCountryCode(countryCode);
-        String phoneNumberOnly = CountryCodeHelper.extractPhoneNumber(countryCode, Provider.of<ProfileController>(context, listen: false).userInfoModel!.phone ?? '');
-        _contactPersonNumberController.text = phoneNumberOnly;
+        _contactPersonNumberController.text = Provider.of<ProfileController>(context, listen: false).userInfoModel!.phone ?? '';
       }
+
     }
   }
 
@@ -153,17 +129,18 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                             inputAction: TextInputAction.next,
                             capitalization: TextCapitalization.words)),
 
+
                         const SizedBox(height: Dimensions.paddingSizeDefaultAddress),
                         Consumer<AuthController>(
                             builder: (context, authProvider,_) {
                               return CustomTextFieldWidget(
-                                required: true,
+                                  required: true,
                                 labelText: getTranslated('phone', context),
                                 hintText: getTranslated('enter_mobile_number', context),
                                 controller: _contactPersonNumberController,
                                 focusNode: _numberNode,
                                 nextFocus: _emailNode,
-                                showCodePicker: true,
+                                showCodePicker: authProvider.isLoggedIn()? false : true,
                                 countryDialCode: authProvider.countryDialCode,
                                 onCountryChanged: (CountryCode countryCode) {
                                   authProvider.countryDialCode = countryCode.dialCode!;
@@ -194,19 +171,13 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
 
 
 
-                          Provider.of<SplashController>(context, listen: false).configModel!.mapApiStatus == 1 ?
                           SizedBox(height: MediaQuery.of(context).size.width/2, width: MediaQuery.of(context).size.width,
                             child: ClipRRect(borderRadius: BorderRadius.circular(Dimensions.paddingSizeSmall),
                               child: Stack(clipBehavior: Clip.none, children: [
                                 GoogleMap(mapType: MapType.normal,
                                   initialCameraPosition: CameraPosition(
                                     target: widget.isEnableUpdate ?
-                                    LatLng(
-                                      (widget.address!.latitude != null && widget.address!.latitude != '0' && widget.address!.latitude != '') ?
-                                      double.parse(widget.address!.latitude!) : _defaut.latitude,
-                                      (widget.address!.longitude != null && widget.address!.longitude != '0' && widget.address!.longitude != '') ?
-                                      double.parse(widget.address!.longitude!) : _defaut.longitude,
-                                    ) :
+                                    LatLng(double.parse(widget.address!.latitude!), double.parse(widget.address!.longitude!)) :
                                     LatLng(locationController.position.latitude, locationController.position.longitude),
                                     zoom: 16),
                                   onTap: (latLng) {
@@ -245,7 +216,8 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(Dimensions.paddingSizeSmall),
                                         color: Colors.white,),
-                                      child: Icon(Icons.fullscreen, color: Theme.of(context).primaryColor, size: 20))))]))) : const SizedBox(),
+                                      child: Icon(Icons.fullscreen, color: Theme.of(context).primaryColor, size: 20))))]))),
+
 
 
                           Padding(padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
@@ -325,9 +297,9 @@ class _AddNewAddressScreenState extends State<AddNewAddressScreen> {
 
                                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(5))),
                                       hint:  Row(children: [
-                                        Image.asset(Images.country),
-                                        const SizedBox(width: Dimensions.paddingSizeSmall),
-                                        Text(_countryCodeController.text, style: textRegular.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).textTheme.bodyLarge!.color)),
+                                          Image.asset(Images.country),
+                                          const SizedBox(width: Dimensions.paddingSizeSmall,),
+                                          Text(_countryCodeController.text, style: textRegular.copyWith(fontSize: Dimensions.fontSizeDefault, color: Theme.of(context).textTheme.bodyLarge!.color)),
                                         ],
                                       ),
                                       items: addressController.restrictedCountryList.map((item) => DropdownMenuItem<String>(

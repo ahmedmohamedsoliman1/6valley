@@ -36,14 +36,11 @@ class MessageBubbleWidget extends StatelessWidget {
     return Column(crossAxisAlignment: isMe ? CrossAxisAlignment.end:CrossAxisAlignment.start, children: [
         Row(crossAxisAlignment: CrossAxisAlignment.start, mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start, children: [
-            isMe ? const SizedBox.shrink() : Padding(
-              padding: const EdgeInsets.only(bottom: 3),
-              child: Container( width: 40, height: 40,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all(color: Theme.of(context).primaryColor)),
-                child: ClipRRect(borderRadius: BorderRadius.circular(20.0),
-                  child: CustomImageWidget(fit: BoxFit.cover, width: 40, height: 40, image: '$baseUrl/$image'))),
-            ),
+            isMe ? const SizedBox.shrink() : Container( width: 40, height: 40,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0),
+                border: Border.all(color: Theme.of(context).primaryColor)),
+              child: ClipRRect(borderRadius: BorderRadius.circular(20.0),
+                child: CustomImageWidget(fit: BoxFit.cover, width: 40, height: 40, image: '$baseUrl/$image'))),
 
 
             if(message.message != null && message.message!.isNotEmpty)

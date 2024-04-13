@@ -238,8 +238,8 @@ int selectedProductTypeIndex = 0;
   }
 
 
-  double featuredIndex = 0.7;
-  void setFeaturedIndex(double index){
+  int featuredIndex = 0;
+  void setFeaturedIndex(int index){
     featuredIndex = index;
     notifyListeners();
   }

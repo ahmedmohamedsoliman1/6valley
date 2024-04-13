@@ -59,20 +59,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-if(Firebase.apps.isEmpty){
-  if(Platform.isAndroid){
-    await Firebase.initializeApp(options: const FirebaseOptions(
-        apiKey: "AIzaSyAKU-DI2rU7MeacKmFx1noxtsK-CFNy5GM",
-        authDomain: "sixvally-ecommerce.firebaseapp.com",
-        projectId: "sixvally-ecommerce",
-        storageBucket: "sixvally-ecommerce.appspot.com",
-        messagingSenderId: "975837518429",
-        appId: "1:975837518429:web:91cf124f328b84449f0bb4"
-    ));
-  }else{
-    await Firebase.initializeApp();
-  }
-}
+  await Firebase.initializeApp();
   await FlutterDownloader.initialize(debug: true , ignoreSsl: true);
   await di.init();
 

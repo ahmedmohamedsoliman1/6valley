@@ -101,8 +101,7 @@ class _InboxScreenState extends State<InboxScreen> {
                           },
                         ) : const NoInternetOrDataScreenWidget(isNoInternet: false, message: 'no_conversion',
                       icon: Images.noInbox,): const InboxShimmerWidget();
-                  }))
-              ),
+                  }))),
 
 
             ]);

@@ -29,7 +29,7 @@ class LatestProductWidget extends StatelessWidget {
       ));},
       child: Padding(padding: const EdgeInsets.symmetric(vertical: Dimensions.paddingSizeSmall),
         child: Container(clipBehavior: Clip.none,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Theme.of(context).cardColor,
             boxShadow: [BoxShadow(color: Theme.of(context).hintColor.withOpacity(.25), spreadRadius: 1, blurRadius: 1,
                 offset: const Offset(0,1))],),
           child: Stack(fit: StackFit.expand, children: [

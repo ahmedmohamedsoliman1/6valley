@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                                           )))),
 
                                 Padding(padding: const EdgeInsets.only(bottom: Dimensions.homePagePadding),
-                                  child: FeaturedProductWidget(scrollController: _scrollController, isHome: true)),
+                                  child: FeaturedProductWidget(scrollController: _scrollController, isHome: true,),),
                               ])]):const SizedBox(): const FeaturedProductShimmer();}),
 
 
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> {
                       return (topSellerProvider.sellerModel != null && (topSellerProvider.sellerModel!.sellers!=null && topSellerProvider.sellerModel!.sellers!.isNotEmpty))?
                       TitleRowWidget(title: getTranslated('top_seller', context),
                           onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (_) =>
-                          const AllTopSellerScreen( title: 'top_stores',)))):
+                          const AllTopSellerScreen( title: 'top_seller',)))):
                       const SizedBox();}),
                   singleVendor?const SizedBox(height: 0):const SizedBox(height: Dimensions.paddingSizeSmall),
 

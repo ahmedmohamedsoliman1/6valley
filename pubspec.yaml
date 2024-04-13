@@ -67,7 +67,6 @@ dependencies:
   webview_flutter_android: ^3.13.2
   webview_flutter_wkwebview: ^3.10.1
   dropdown_button2: ^2.3.9
-  gradient_borders: ^1.0.0
 
 
 
@@ -75,6 +74,11 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/applogo.png"
 
 
 

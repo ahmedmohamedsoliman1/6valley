@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/features/location/controllers/location_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/features/location/widgets/location_search_dialog_widget.dart';
-import 'package:flutter_sixvalley_ecommerce/features/splash/controllers/splash_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/color_resources.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/dimensions.dart';
@@ -47,7 +46,7 @@ class SelectLocationScreenState extends State<SelectLocationScreen> {
     return Scaffold(
       appBar: CustomAppBar(title: getTranslated('select_delivery_address', context)),
       body: Consumer<LocationController>(
-          builder: (context, locationController, child) => Provider.of<SplashController>(context, listen: false).configModel!.mapApiStatus == 1 ? Stack(clipBehavior: Clip.none, children: [
+          builder: (context, locationController, child) => Stack(clipBehavior: Clip.none, children: [
               GoogleMap(mapType: MapType.normal,
                 initialCameraPosition: CameraPosition(
                   target: LatLng(locationController.position.latitude, locationController.position.longitude), zoom: 16),
@@ -101,7 +100,7 @@ class SelectLocationScreenState extends State<SelectLocationScreen> {
               Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor))) :
               const SizedBox(),
             ],
-          ) : const SizedBox(),
+          ),
         ),
     );
   }

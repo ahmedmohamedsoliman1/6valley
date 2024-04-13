@@ -1,5 +1,3 @@
-import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
-import 'package:flutter_sixvalley_ecommerce/main.dart';
 import 'package:intl/intl.dart';
 
 class DateConverter {
@@ -106,24 +104,4 @@ class DateConverter {
     return localDateToIsoStringAMPM(dateTime);
   }
 
-  static String compareDates(String inputDate) {
-    DateTime currentDate = DateTime.now();
-    DateTime parsedDate = DateTime.parse(inputDate);
-
-    Duration difference = currentDate.difference(parsedDate);
-    int hoursDifference = difference.inHours;
-    int daysDifference = difference.inDays;
-
-    if (hoursDifference < 1) {
-      return DateFormat('hh:mm a').format(parsedDate);
-    } else if (hoursDifference >= 1 && hoursDifference <= 23) {
-      return '$hoursDifference ${getTranslated("hr ago", Get.context!)}';
-    } else if (daysDifference == 1) {
-      return '${getTranslated("yesterday", Get.context!)}';
-    } else if (daysDifference >= 2 && daysDifference <= 7) {
-      return '$daysDifference ${getTranslated("days_ago", Get.context!)}';
-    } else {
-      return DateFormat('MM/dd/yyyy').format(parsedDate);
-    }
-  }
 }

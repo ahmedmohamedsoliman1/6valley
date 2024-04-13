@@ -2,10 +2,10 @@ import 'package:flutter_sixvalley_ecommerce/localization/models/language_model.d
 import 'package:flutter_sixvalley_ecommerce/utill/images.dart';
 
 class AppConstants {
-  static const String appName = '6valley';
+  static const String appName = 'My Car';
   static const String slogan = 'E-Commerce Marketplace';
-  static const String appVersion = '14.5';
-  static const String baseUrl = 'https://6valley.6amtech.com';
+  static const String appVersion = '14.4';
+  static const String baseUrl = 'https://mycareg.com';
   static const String userId = 'userId';
   static const String name = 'name';
   static const String categoriesUri = '/api/v1/categories?guest_id=1';

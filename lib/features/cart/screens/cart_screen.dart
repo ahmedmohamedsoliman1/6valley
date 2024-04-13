@@ -263,7 +263,6 @@ class CartScreenState extends State<CartScreen> {
                                 showCustomSnackBar(getTranslated('unavailable_shop_product_in_your_cart', context), context);
                               }
                               else if(hasNull && configProvider.configModel!.shippingMethod =='sellerwise_shipping' && !onlyDigital){
-                                changeColor();
                                 showCustomSnackBar(getTranslated('select_all_shipping_method', context), context);
                               }
 
@@ -276,11 +275,8 @@ class CartScreenState extends State<CartScreen> {
                                 showCustomSnackBar(getTranslated('some_shop_not_full_fill_minimum_order_amount', context), context);
                               }
 
-                              else {
-                                print('=====TotalPhysical====cart===>>${totalPhysical}');
-                                print('=====OnlyDigital=====cart====>>${onlyDigital}');
-                                print('=====hasPhicial=====cart====>>${totalPhysical > 0}');
 
+                              else {
                                 Navigator.push(context, MaterialPageRoute(builder: (_) => CheckoutScreen(quantity: totalQuantity,
                                   cartList: cartList,totalOrderAmount: amount,shippingFee: shippingAmount-freeDeliveryAmountDiscount, discount: discount,
                                   tax: tax, onlyDigital: sellerGroupList.length != totalPhysical, hasPhysical: totalPhysical > 0)));
@@ -346,14 +342,8 @@ class CartScreenState extends State<CartScreen> {
                               }
                             }
 
-                            print('======Hello======>>${(configProvider.configModel!.shippingMethod =='sellerwise_shipping' &&
-                                sellerGroupList[index].shippingType == 'order_wise' && Provider.of<ShippingController>(context, listen: false).shippingList![index].shippingIndex == -1)}');
-
-                            return AnimatedContainer(
-                              color: ((sellerGroupList[index].minimumOrderAmountInfo!> totalCost) || (configProvider.configModel!.shippingMethod =='sellerwise_shipping' &&
-                                  sellerGroupList[index].shippingType == 'order_wise' && Provider.of<ShippingController>(context, listen: false).shippingList![index].shippingIndex == -1)) ? _currentColor :
-                              index.floor().isOdd? Theme.of(context).colorScheme.onSecondaryContainer : Theme.of(context).canvasColor,
-
+                            return AnimatedContainer(color: (sellerGroupList[index].minimumOrderAmountInfo!> totalCost) ? _currentColor:
+                            index.floor().isOdd? Theme.of(context).colorScheme.onSecondaryContainer : Theme.of(context).canvasColor,
                               duration: duration,
                               child: Padding(padding: const EdgeInsets.only(bottom: Dimensions.paddingSizeSmall),
                                 child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [

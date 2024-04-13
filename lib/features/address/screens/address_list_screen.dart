@@ -45,7 +45,6 @@ class _AddressListScreenState extends State<AddressListScreen> {
             child: ListView.builder(padding: const EdgeInsets.all(0),
               itemCount: locationProvider.addressList?.length,
               itemBuilder: (context, index){
-              print('=====Address=====>>${locationProvider.addressList![index].toJson()}');
               return Padding(
                 padding: const EdgeInsets.fromLTRB(Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, Dimensions.paddingSizeDefault, 0),
                 child: Container(padding: const EdgeInsets.all(Dimensions.paddingSizeDefault),
@@ -59,7 +58,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
 
                       InkWell(onTap: ()=> Navigator.of(context).push(MaterialPageRoute(builder: (_)=> AddNewAddressScreen(
                         isBilling:  locationProvider.addressList?[index].isBilling,
-                        address: locationProvider.addressList?[index], isEnableUpdate: true))),
+                        address: locationProvider.addressList?[index], isEnableUpdate: true,))),
                         child: Container(width: 40,
                           decoration: BoxDecoration(borderRadius:
                          BorderRadius.circular(5),

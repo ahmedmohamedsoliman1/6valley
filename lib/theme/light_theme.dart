@@ -6,7 +6,6 @@ ThemeData light = ThemeData(
   brightness: Brightness.light,
   highlightColor: Colors.white,
   hintColor: const Color(0xFF9E9E9E),
-  splashColor: Colors.transparent,
   colorScheme: const ColorScheme.light(primary: Color(0xFF1455AC),
     secondary: Color(0xFF004C8E),
     tertiary: Color(0xFFF9D4A8),

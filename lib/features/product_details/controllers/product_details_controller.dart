@@ -125,7 +125,4 @@ class ProductDetailsController extends ChangeNotifier {
   }
 
 
-  void removePrevLink() {
-    _sharableLink = null;
-  }
 }

@@ -24,7 +24,6 @@ class _ShippingDetailsWidgetState extends State<ShippingDetailsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print('========>>${widget.hasPhysical}');
     return Consumer<CheckoutController>(
         builder: (context, shippingProvider,_) {
           return Consumer<AddressController>(
@@ -73,7 +72,7 @@ class _ShippingDetailsWidgetState extends State<ShippingDetailsWidget> {
                               title: locationProvider.addressList![shippingProvider.addressIndex!].address??''),])])]))): const SizedBox(),
                       SizedBox(height: widget.hasPhysical? Dimensions.paddingSizeSmall:0),
 
-                      if(widget.hasPhysical && widget.billingAddress)
+                      if(widget.billingAddress)
                         Padding(padding:  EdgeInsets.only(bottom: widget.hasPhysical? Dimensions.paddingSizeSmall:0),
                           child: InkWell(highlightColor: Colors.transparent,focusColor: Colors.transparent, splashColor: Colors.transparent,
                             onTap: ()=> shippingProvider.setSameAsBilling(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sixvalley_ecommerce/features/address/controllers/address_controller.dart';
-import 'package:flutter_sixvalley_ecommerce/features/profile/controllers/profile_contrroller.dart';
 import 'package:flutter_sixvalley_ecommerce/localization/language_constrants.dart';
 import 'package:flutter_sixvalley_ecommerce/features/auth/controllers/auth_controller.dart';
 import 'package:flutter_sixvalley_ecommerce/utill/custom_themes.dart';
@@ -46,8 +45,7 @@ class LogoutCustomBottomSheetWidget extends StatelessWidget {
               Provider.of<AuthController>(context, listen: false).logOut().then((condition) {
                 Navigator.pop(context);
                 Provider.of<AuthController>(context,listen: false).clearSharedData();
-                Provider.of<ProfileController>(context,listen: false).clearProfileData();
-                // Provider.of<AddressController>(context, listen: false).getAddressList();
+                Provider.of<AddressController>(context, listen: false).getAddressList();
                 Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const AuthScreen()), (route) => false);
               });
             })))]))

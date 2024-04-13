@@ -14,7 +14,7 @@
   "brand": "Brands",
   "featured_products": "Featured Products",
   "featured_deals": "Featured Deals",
-  "top_seller": "Top Store",
+  "top_seller": "Top Sellers",
   "latest_products": "Latest Products",
   "product_details": "Product Details",
   "coupon_voucher": "Coupon & Voucher",
@@ -704,8 +704,8 @@
   "fund_added_into_wallet": "Fund added into wallet",
   "your_fund_successfully_added_to_your_wallet": "Your fund successfully added to your wallet",
   "copied": "Copied!",
-  "new_seller": "New Store",
-  "all_seller" : "All Store",
+  "new_seller": "New Vendor",
+  "all_seller" : "All Vendor",
   "stock_out_product_in_your_cart": "Stock out product in your cart",
   "store_is_closed" : "Store is closed",
   "successfully_added_to_wishlist": "Successfully added to wishlist",
@@ -717,11 +717,5 @@
   "shop_close_message" : "Sorry ! Currently we are not available. But you can ask or still message us. We will get back to you soon. Thank you for your patience..",
   "same_as_delivery": "Same as Delivery",
   "refund_amount": "Refund Amount",
-  "price_range": "Price Range",
-
-  "hr_ago": "hr ago",
-  "yesterday": "Yesterday",
-  "days_ago": "Days ago",
-  "search_location": "Search location"
-
+  "price_range": "Price Range"
 }

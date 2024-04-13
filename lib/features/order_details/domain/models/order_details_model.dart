@@ -50,6 +50,8 @@ class OrderDetailsModel {
         List<VerificationImages>? verificationImages,
         Order? order,
         Product? product,
+
+
       }) {
     _id = id;
     _orderId = orderId;
@@ -162,9 +164,8 @@ class VerificationImages {
 
 class Order {
   int? isShippingFree;
-  String? sellerIs;
 
-  Order({this.isShippingFree, this.sellerIs});
+  Order({this.isShippingFree});
 
   Order.fromJson(Map<String, dynamic> json) {
     try{
@@ -172,7 +173,6 @@ class Order {
     }catch(e){
       isShippingFree = json['is_shipping_free']?1:0;
     }
-    sellerIs = json['seller_is'];
   }
 
 

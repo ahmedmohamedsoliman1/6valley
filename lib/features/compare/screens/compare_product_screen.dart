@@ -294,7 +294,7 @@ class CompareCard extends StatelessWidget {
 
 
 
-                            Text(product != null?'(${product!.reviewCount?? 0})' :'',
+                            Text(product != null?'(${product!.reviewCount.toString()})' :'',
                                 style: textRegular.copyWith(fontSize: Dimensions.fontSizeSmall, color: Theme.of(context).hintColor)),
 
                           ]),
