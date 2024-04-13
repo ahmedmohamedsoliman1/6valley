@@ -1,0 +1,24 @@
+// build.gradle (allprojects)
+
+// Set up repositories for dependencies
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    // Set the build directory
+    rootProject.buildDir = '../build'
+
+    // Configure subprojects
+    subprojects {
+        project.buildDir = "${rootProject.buildDir}/${project.name}"
+    }
+
+    // Ensure evaluation depends on the app module
+    subprojects {
+        project.evaluationDependsOn(':app')
+    }
+
+
+}
